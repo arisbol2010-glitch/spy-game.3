@@ -3,36 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Игра «Шпион»</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-        }
-        #app {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-        }
-        button {
-            margin: 5px;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
-        }
-        input {
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -41,7 +12,7 @@
 
     <div id="menu">
         <input id="playerName" placeholder="Введите имя">
-        <br><br>
+        <br>
         <button onclick="addPlayer()">Добавить игрока</button>
         <button onclick="startGame()">Начать игру</button>
     </div>
@@ -51,55 +22,13 @@
     <div id="game" class="hidden">
         <h2 id="role"></h2>
         <h3 id="location"></h3>
+        <p id="timer"></p>
+        <button onclick="vote()">Голосовать</button>
     </div>
 </div>
 
-<script>
-console.log("JS ТОЧНО ЗАПУСТИЛСЯ");
-
-let players = [];
-let spy = "";
-let gameLocation = "";
-
-const locations = {
-    "Город": ["Школа", "Кафе", "Больница"],
-    "Отдых": ["Пляж", "Отель"],
-    "Транспорт": ["Самолёт", "Поезд"]
-};
-
-function addPlayer() {
-    const input = document.getElementById("playerName");
-    const name = input.value.trim();
-
-    if (!name) return;
-
-    players.push(name);
-    input.value = "";
-
-    document.getElementById("players").innerHTML =
-        "<h3>Игроки:</h3>" + players.join("<br>");
-}
-
-function startGame() {
-    if (players.length < 3) {
-        alert("Минимум 3 игрока!");
-        return;
-    }
-
-    spy = players[Math.floor(Math.random() * players.length)];
-
-    const category = Object.keys(locations)[0];
-    gameLocation = locations[category][0];
-
-    document.getElementById("menu").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
-
-    document.getElementById("role").innerText = "Игра началась";
-    document.getElementById("location").innerText =
-        "Шпион: " + spy + " | Локация: " + gameLocation;
-}
-</script>
-
+<script src="locations.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
 
