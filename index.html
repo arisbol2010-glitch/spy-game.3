@@ -12,7 +12,7 @@
 
     <div id="menu">
         <input id="playerName" placeholder="Введите имя">
-        <br>
+        <br><br>
         <button onclick="addPlayer()">Добавить игрока</button>
         <button onclick="startGame()">Начать игру</button>
     </div>
@@ -23,7 +23,16 @@
         <h2 id="role"></h2>
         <h3 id="location"></h3>
         <p id="timer"></p>
-        <button onclick="vote()">Голосовать</button>
+
+        <button onclick="startVoting()">🗳 Начать голосование</button>
+
+        <div id="voting" class="hidden">
+            <p>Выберите игрока:</p>
+            <select id="voteSelect"></select>
+            <br><br>
+            <button onclick="submitVote()">Проголосовать</button>
+            <p id="voteStatus"></p>
+        </div>
     </div>
 </div>
 
@@ -31,4 +40,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
