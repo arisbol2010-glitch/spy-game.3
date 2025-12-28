@@ -1,14 +1,19 @@
 let players = [];
 let spy = "";
-let location = "";
+let gameLocation = "";
 let time = 300;
 let timerInterval;
 
 function addPlayer() {
-    const name = document.getElementById("playerName").value;
-    if (name && !players.includes(name)) {
+    const input = document.getElementById("playerName");
+    const name = input.value.trim();
+
+    if (!name) return;
+
+    if (!players.includes(name)) {
         players.push(name);
         updatePlayers();
+        input.value = "";
     }
 }
 
@@ -25,26 +30,32 @@ function startGame() {
 
     spy = players[Math.floor(Math.random() * players.length)];
 
-    const category = randomKey(locations);
-    location = locations[category][
+    const categories = Object.keys(locations);
+    const category = categories[Math.floor(Math.random() * categories.length)];
+
+    gameLocation = locations[category][
         Math.floor(Math.random() * locations[category].length)
     ];
 
     document.getElementById("menu").classList.add("hidden");
     document.getElementById("game").classList.remove("hidden");
 
-    if (confirm("Ты шпион?")) {
+    const isSpy = confirm("Ты шпион?");
+
+    if (isSpy) {
         document.getElementById("role").innerText = "🕵️ Ты ШПИОН";
         document.getElementById("location").innerText = "Локация неизвестна";
     } else {
         document.getElementById("role").innerText = "🙂 Ты игрок";
-        document.getElementById("location").innerText = "📍 " + location;
+        document.getElementById("location").innerText = "📍 " + gameLocation;
     }
 
     startTimer();
 }
 
 function startTimer() {
+    time = 300;
+
     timerInterval = setInterval(() => {
         time--;
         document.getElementById("timer").innerText =
@@ -59,15 +70,11 @@ function startTimer() {
 
 function vote() {
     const voted = prompt("Кого вы считаете шпионом?");
+    if (!voted) return;
+
     if (voted === spy) {
         alert("🎉 Шпион найден!");
     } else {
         alert("❌ Это не шпион!");
     }
-}
-
-function randomKey(obj) {
-    return Object.keys(obj)[
-        Math.floor(Math.random() * Object.keys(obj).length)
-    ];
 }
