@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+}
+
+#app {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.hidden {
+    display: none;
+}

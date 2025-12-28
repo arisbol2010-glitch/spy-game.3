@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Игра «Шпион»</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+    <h1>🕵️ Игра «Шпион»</h1>
+
+    <div id="menu">
+        <input id="playerName" placeholder="Введите имя">
+        <button onclick="addPlayer()">Добавить игрока</button>
+        <button onclick="startGame()">Начать игру</button>
+    </div>
+
+    <div id="players"></div>
+
+    <div id="game" class="hidden">
+        <h2 id="role"></h2>
+        <h3 id="location"></h3>
+        <p id="timer"></p>
+        <button onclick="vote()">Голосовать</button>
+    </div>
+</div>
+
+<script src="locations.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
