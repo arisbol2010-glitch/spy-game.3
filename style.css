@@ -1,36 +1,105 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle, #0b3d2e, #021b12);
-  color: white;
-  text-align: center;
+const locations = [
+  "Казино",
+  "Школа",
+  "Пляж",
+  "Самолет",
+  "Больница",
+  "Отель"
+];
+
+let players = [];
+let playerCount = 0;
+let currentIndex = 0;
+let spyIndex = 0;
+let location = "";
+
+const startScreen = document.getElementById("startScreen");
+const nameScreen = document.getElementById("nameScreen");
+const cardScreen = document.getElementById("cardScreen");
+const timerScreen = document.getElementById("timerScreen");
+
+const nameTitle = document.getElementById("nameTitle");
+const cardTitle = document.getElementById("cardTitle");
+const cardText = document.getElementById("cardText");
+const timerDiv = document.getElementById("timer");
+const sound = document.getElementById("tickSound");
+
+function startGame() {
+  playerCount = Number(document.getElementById("playerCount").value);
+  if (playerCount < 3) {
+    alert("Минимум 3 игрока");
+    return;
+  }
+
+  startScreen.classList.add("hidden");
+  nameScreen.classList.remove("hidden");
+
+  askName();
 }
 
-.screen {
-  padding: 20px;
+function askName() {
+  nameTitle.innerText = `Игрок ${currentIndex + 1}, введите имя`;
+  document.getElementById("playerName").value = "";
 }
 
-.hidden {
-  display: none;
+function saveName() {
+  const name = document.getElementById("playerName").value.trim();
+  if (!name) return;
+
+  players.push({ name });
+  currentIndex++;
+
+  if (currentIndex < playerCount) {
+    askName();
+  } else {
+    prepareRoles();
+  }
 }
 
-input {
-  padding: 10px;
-  font-size: 16px;
-  width: 80%;
-  margin: 10px 0;
+function prepareRoles() {
+  spyIndex = Math.floor(Math.random() * playerCount);
+  location = locations[Math.floor(Math.random() * locations.length)];
+  currentIndex = 0;
+
+  nameScreen.classList.add("hidden");
+  showCard();
 }
 
-button {
-  padding: 12px 20px;
-  font-size: 16px;
-  background: #8b0000;
-  color: white;
-  border: none;
-  border-radius: 8px;
+function showCard() {
+  cardScreen.classList.remove("hidden");
+
+  cardTitle.innerText = players[currentIndex].name;
+
+  if (currentIndex === spyIndex) {
+    cardText.innerText = "🕵️ ВЫ ШПИОН";
+  } else {
+    cardText.innerText = "📍 Локация: " + location;
+  }
 }
 
-#timer {
-  font-size: 48px;
-  color: #ffcc00;
+function hideCard() {
+  cardScreen.classList.add("hidden");
+  currentIndex++;
+
+  if (currentIndex < playerCount) {
+    showCard();
+  } else {
+    startTimer();
+  }
+}
+
+function startTimer() {
+  timerScreen.classList.remove("hidden");
+  let time = 300;
+
+  const interval = setInterval(() => {
+    time--;
+    timerDiv.innerText = time;
+    sound.play();
+
+    if (time <= 0) {
+      clearInterval(interval);
+      alert("Время вышло! Обсуждайте и определяйте шпиона.");
+    }
+  }, 1000);
 }
