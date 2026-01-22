@@ -1,66 +1,36 @@
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
   background: radial-gradient(circle, #0b3d2e, #021b12);
-  color: #fff;
-}
-
-.game {
+  color: white;
   text-align: center;
-  padding: 10px;
 }
 
-#timer {
-  font-size: 32px;
-  color: #ffcc00;
+.screen {
+  padding: 20px;
 }
 
-.table {
-  width: 90vw;
-  max-width: 400px;
-  height: 90vw;
-  max-height: 400px;
-  margin: 20px auto;
-  border-radius: 50%;
-  background: radial-gradient(circle, #146b4a, #063c29);
-  border: 6px solid #8b0000;
-  position: relative;
+.hidden {
+  display: none;
 }
 
-.player {
-  position: absolute;
-  width: 80px;
-  height: 50px;
-  background: #222;
-  border-radius: 10px;
-  line-height: 50px;
-  font-size: 14px;
-  border: 2px solid #555;
-}
-
-.player.active {
-  border-color: #00ff00;
-  box-shadow: 0 0 10px #00ff00;
-}
-
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-button, select {
+input {
   padding: 10px;
   font-size: 16px;
-  border-radius: 8px;
-  border: none;
+  width: 80%;
+  margin: 10px 0;
 }
 
 button {
+  padding: 12px 20px;
+  font-size: 16px;
   background: #8b0000;
-  color: #fff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+#timer {
+  font-size: 48px;
+  color: #ffcc00;
 }
