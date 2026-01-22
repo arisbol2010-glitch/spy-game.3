@@ -2,33 +2,38 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <title>Шпион</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Шпион — Казино</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="game">
+<div class="screen" id="startScreen">
   <h1>🕵️ Игра «Шпион»</h1>
+  <p>Введите количество игроков</p>
+  <input type="number" id="playerCount" min="3" max="10">
+  <button onclick="startGame()">Далее</button>
+</div>
 
+<div class="screen hidden" id="nameScreen">
+  <h2 id="nameTitle"></h2>
+  <input type="text" id="playerName" placeholder="Введите имя">
+  <button onclick="saveName()">Сохранить имя</button>
+</div>
+
+<div class="screen hidden" id="cardScreen">
+  <h2 id="cardTitle"></h2>
+  <p id="cardText"></p>
+  <button onclick="hideCard()">Скрыть карту</button>
+</div>
+
+<div class="screen hidden" id="timerScreen">
+  <h2>Игра началась</h2>
   <div id="timer">300</div>
-
-  <div class="table">
-    <div class="players" id="players"></div>
-  </div>
-
-  <div class="controls">
-    <select id="targetSelect"></select>
-    <button onclick="ask()">Задать вопрос</button>
-    <button onclick="nextTurn()">Передать ход</button>
-    <button id="guessBtn" onclick="guessLocation()" style="display:none">
-      Угадать локацию
-    </button>
-  </div>
+  <p>Обсуждайте и ищите шпиона</p>
 </div>
 
 <audio id="tickSound" src="timer.mp3"></audio>
-
 <script src="script.js"></script>
 </body>
 </html>
